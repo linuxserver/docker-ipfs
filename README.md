@@ -23,28 +23,28 @@ Find us at:
 * [GitHub](https://github.com/linuxserver) - view the source for all of our repositories.
 * [Open Collective](https://opencollective.com/linuxserver) - please consider helping us by either donating or contributing to our budget
 
-# [linuxserver/radarr](https://github.com/linuxserver/docker-radarr)
+# [linuxserver/ipfs](https://github.com/linuxserver/docker-ipfs)
 
-[![GitHub Stars](https://img.shields.io/github/stars/linuxserver/docker-radarr.svg?color=94398d&labelColor=555555&logoColor=ffffff&style=for-the-badge&logo=github)](https://github.com/linuxserver/docker-radarr)
-[![GitHub Release](https://img.shields.io/github/release/linuxserver/docker-radarr.svg?color=94398d&labelColor=555555&logoColor=ffffff&style=for-the-badge&logo=github)](https://github.com/linuxserver/docker-radarr/releases)
-[![GitHub Package Repository](https://img.shields.io/static/v1.svg?color=94398d&labelColor=555555&logoColor=ffffff&style=for-the-badge&label=linuxserver.io&message=GitHub%20Package&logo=github)](https://github.com/linuxserver/docker-radarr/packages)
-[![GitLab Container Registry](https://img.shields.io/static/v1.svg?color=94398d&labelColor=555555&logoColor=ffffff&style=for-the-badge&label=linuxserver.io&message=GitLab%20Registry&logo=gitlab)](https://gitlab.com/Linuxserver.io/docker-radarr/container_registry)
-[![MicroBadger Layers](https://img.shields.io/microbadger/layers/linuxserver/radarr.svg?color=94398d&labelColor=555555&logoColor=ffffff&style=for-the-badge)](https://microbadger.com/images/linuxserver/radarr "Get your own version badge on microbadger.com")
-[![Docker Pulls](https://img.shields.io/docker/pulls/linuxserver/radarr.svg?color=94398d&labelColor=555555&logoColor=ffffff&style=for-the-badge&label=pulls&logo=docker)](https://hub.docker.com/r/linuxserver/radarr)
-[![Docker Stars](https://img.shields.io/docker/stars/linuxserver/radarr.svg?color=94398d&labelColor=555555&logoColor=ffffff&style=for-the-badge&label=stars&logo=docker)](https://hub.docker.com/r/linuxserver/radarr)
-[![Jenkins Build](https://img.shields.io/jenkins/build?labelColor=555555&logoColor=ffffff&style=for-the-badge&jobUrl=https%3A%2F%2Fci.linuxserver.io%2Fjob%2FDocker-Pipeline-Builders%2Fjob%2Fdocker-radarr%2Fjob%2Fmaster%2F&logo=jenkins)](https://ci.linuxserver.io/job/Docker-Pipeline-Builders/job/docker-radarr/job/master/)
-[![LSIO CI](https://img.shields.io/badge/dynamic/yaml?color=94398d&labelColor=555555&logoColor=ffffff&style=for-the-badge&label=CI&query=CI&url=https%3A%2F%2Flsio-ci.ams3.digitaloceanspaces.com%2Flinuxserver%2Fradarr%2Flatest%2Fci-status.yml)](https://lsio-ci.ams3.digitaloceanspaces.com/linuxserver/radarr/latest/index.html)
+[![GitHub Stars](https://img.shields.io/github/stars/linuxserver/docker-ipfs.svg?color=94398d&labelColor=555555&logoColor=ffffff&style=for-the-badge&logo=github)](https://github.com/linuxserver/docker-ipfs)
+[![GitHub Release](https://img.shields.io/github/release/linuxserver/docker-ipfs.svg?color=94398d&labelColor=555555&logoColor=ffffff&style=for-the-badge&logo=github)](https://github.com/linuxserver/docker-ipfs/releases)
+[![GitHub Package Repository](https://img.shields.io/static/v1.svg?color=94398d&labelColor=555555&logoColor=ffffff&style=for-the-badge&label=linuxserver.io&message=GitHub%20Package&logo=github)](https://github.com/linuxserver/docker-ipfs/packages)
+[![GitLab Container Registry](https://img.shields.io/static/v1.svg?color=94398d&labelColor=555555&logoColor=ffffff&style=for-the-badge&label=linuxserver.io&message=GitLab%20Registry&logo=gitlab)](https://gitlab.com/Linuxserver.io/docker-ipfs/container_registry)
+[![MicroBadger Layers](https://img.shields.io/microbadger/layers/linuxserver/ipfs.svg?color=94398d&labelColor=555555&logoColor=ffffff&style=for-the-badge)](https://microbadger.com/images/linuxserver/ipfs "Get your own version badge on microbadger.com")
+[![Docker Pulls](https://img.shields.io/docker/pulls/linuxserver/ipfs.svg?color=94398d&labelColor=555555&logoColor=ffffff&style=for-the-badge&label=pulls&logo=docker)](https://hub.docker.com/r/linuxserver/ipfs)
+[![Docker Stars](https://img.shields.io/docker/stars/linuxserver/ipfs.svg?color=94398d&labelColor=555555&logoColor=ffffff&style=for-the-badge&label=stars&logo=docker)](https://hub.docker.com/r/linuxserver/ipfs)
+[![Jenkins Build](https://img.shields.io/jenkins/build?labelColor=555555&logoColor=ffffff&style=for-the-badge&jobUrl=https%3A%2F%2Fci.linuxserver.io%2Fjob%2FDocker-Pipeline-Builders%2Fjob%2Fdocker-ipfs%2Fjob%2Fmaster%2F&logo=jenkins)](https://ci.linuxserver.io/job/Docker-Pipeline-Builders/job/docker-ipfs/job/master/)
+[![LSIO CI](https://img.shields.io/badge/dynamic/yaml?color=94398d&labelColor=555555&logoColor=ffffff&style=for-the-badge&label=CI&query=CI&url=https%3A%2F%2Flsio-ci.ams3.digitaloceanspaces.com%2Flinuxserver%2Fipfs%2Flatest%2Fci-status.yml)](https://lsio-ci.ams3.digitaloceanspaces.com/linuxserver/ipfs/latest/index.html)
 
-[Radarr](https://ipfs.io/) - A peer-to-peer hypermedia protocol designed to make the web faster, safer, and more open.
+[Ipfs](https://ipfs.io/) - A peer-to-peer hypermedia protocol designed to make the web faster, safer, and more open.
 
 
-[![radarr](https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/Ipfs-logo-1024-ice-text.png/480px-Ipfs-logo-1024-ice-text.png)](https://ipfs.io/)
+[![ipfs](https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/Ipfs-logo-1024-ice-text.png/480px-Ipfs-logo-1024-ice-text.png)](https://ipfs.io/)
 
 ## Supported Architectures
 
 Our images support multiple architectures such as `x86-64`, `arm64` and `armhf`. We utilise the docker manifest for multi-platform awareness. More information is available from docker [here](https://github.com/docker/distribution/blob/master/docs/spec/manifest-v2-2.md#manifest-list) and our announcement [here](https://blog.linuxserver.io/2019/02/21/the-lsio-pipeline-project/).
 
-Simply pulling `linuxserver/radarr` should retrieve the correct image for your arch, but you can also pull specific arch images via tags.
+Simply pulling `linuxserver/ipfs` should retrieve the correct image for your arch, but you can also pull specific arch images via tags.
 
 The architectures supported by this image are:
 
@@ -63,7 +63,7 @@ Here are some example snippets to help you get started creating a container.
 
 ```
 docker create \
-  --name=radarr \
+  --name=ipfs \
   -e PUID=1000 \
   -e PGID=1000 \
   -e TZ=Europe/London \
@@ -74,7 +74,7 @@ docker create \
   -p 443:443 `#optional` \
   -v /path/to/data:/config \
   --restart unless-stopped \
-  linuxserver/radarr
+  linuxserver/ipfs
 ```
 
 
@@ -86,9 +86,9 @@ Compatible with docker-compose v2 schemas.
 ---
 version: "2.1"
 services:
-  radarr:
-    image: linuxserver/radarr
-    container_name: radarr
+  ipfs:
+    image: linuxserver/ipfs
+    container_name: ipfs
     environment:
       - PUID=1000
       - PGID=1000
@@ -166,19 +166,19 @@ For more on using IPFS please read the docs [here](https://docs.ipfs.io/)
 
 
 ## Docker Mods
-[![Docker Mods](https://img.shields.io/badge/dynamic/yaml?color=94398d&labelColor=555555&logoColor=ffffff&style=for-the-badge&label=mods&query=%24.mods%5B%27radarr%27%5D.mod_count&url=https%3A%2F%2Fraw.githubusercontent.com%2Flinuxserver%2Fdocker-mods%2Fmaster%2Fmod-list.yml)](https://mods.linuxserver.io/?mod=radarr "view available mods for this container.")
+[![Docker Mods](https://img.shields.io/badge/dynamic/yaml?color=94398d&labelColor=555555&logoColor=ffffff&style=for-the-badge&label=mods&query=%24.mods%5B%27ipfs%27%5D.mod_count&url=https%3A%2F%2Fraw.githubusercontent.com%2Flinuxserver%2Fdocker-mods%2Fmaster%2Fmod-list.yml)](https://mods.linuxserver.io/?mod=ipfs "view available mods for this container.")
 
 We publish various [Docker Mods](https://github.com/linuxserver/docker-mods) to enable additional functionality within the containers. The list of Mods available for this image (if any) can be accessed via the dynamic badge above.
 
 
 ## Support Info
 
-* Shell access whilst the container is running: `docker exec -it radarr /bin/bash`
-* To monitor the logs of the container in realtime: `docker logs -f radarr`
+* Shell access whilst the container is running: `docker exec -it ipfs /bin/bash`
+* To monitor the logs of the container in realtime: `docker logs -f ipfs`
 * container version number
-  * `docker inspect -f '{{ index .Config.Labels "build_version" }}' radarr`
+  * `docker inspect -f '{{ index .Config.Labels "build_version" }}' ipfs`
 * image version number
-  * `docker inspect -f '{{ index .Config.Labels "build_version" }}' linuxserver/radarr`
+  * `docker inspect -f '{{ index .Config.Labels "build_version" }}' linuxserver/ipfs`
 
 ## Updating Info
 
@@ -187,18 +187,18 @@ Most of our images are static, versioned, and require an image update and contai
 Below are the instructions for updating containers:
 
 ### Via Docker Run/Create
-* Update the image: `docker pull linuxserver/radarr`
-* Stop the running container: `docker stop radarr`
-* Delete the container: `docker rm radarr`
+* Update the image: `docker pull linuxserver/ipfs`
+* Stop the running container: `docker stop ipfs`
+* Delete the container: `docker rm ipfs`
 * Recreate a new container with the same docker create parameters as instructed above (if mapped correctly to a host folder, your `/config` folder and settings will be preserved)
-* Start the new container: `docker start radarr`
+* Start the new container: `docker start ipfs`
 * You can also remove the old dangling images: `docker image prune`
 
 ### Via Docker Compose
 * Update all images: `docker-compose pull`
-  * or update a single image: `docker-compose pull radarr`
+  * or update a single image: `docker-compose pull ipfs`
 * Let compose update all containers as necessary: `docker-compose up -d`
-  * or update a single container: `docker-compose up -d radarr`
+  * or update a single container: `docker-compose up -d ipfs`
 * You can also remove the old dangling images: `docker image prune`
 
 ### Via Watchtower auto-updater (especially useful if you don't remember the original parameters)
@@ -207,7 +207,7 @@ Below are the instructions for updating containers:
   docker run --rm \
   -v /var/run/docker.sock:/var/run/docker.sock \
   containrrr/watchtower \
-  --run-once radarr
+  --run-once ipfs
   ```
 
 **Note:** We do not endorse the use of Watchtower as a solution to automated updates of existing Docker containers. In fact we generally discourage automated updates. However, this is a useful tool for one-time manual updates of containers where you have forgotten the original parameters. In the long term, we highly recommend using Docker Compose.
@@ -218,12 +218,12 @@ Below are the instructions for updating containers:
 
 If you want to make local modifications to these images for development purposes or just to customize the logic:
 ```
-git clone https://github.com/linuxserver/docker-radarr.git
-cd docker-radarr
+git clone https://github.com/linuxserver/docker-ipfs.git
+cd docker-ipfs
 docker build \
   --no-cache \
   --pull \
-  -t linuxserver/radarr:latest .
+  -t linuxserver/ipfs:latest .
 ```
 
 The ARM variants can be built on x86_64 hardware using `multiarch/qemu-user-static`
