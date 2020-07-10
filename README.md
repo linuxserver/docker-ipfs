@@ -154,7 +154,7 @@ In this instance `PUID=1000` and `PGID=1000`, to find yours use `id user` as bel
 &nbsp;
 ## Application Setup
 
-Access the webui at http://localhost , from there you can upload and manage files you push to IPFS. Your gateway to access IPFS files is http://localhost:8080/ipfs/YOUR-FILE-HASH-HERE . You can also simply use public IPFS gateways like: 
+Access the webui at http://localhost , if not using localhost scroll to the bottom of the page and set the API Address setting to IE http://192.168.1.10:5001 , from there you can upload and manage files you push to IPFS. Your gateway to access IPFS files is http://localhost:8080/ipfs/YOUR-FILE-HASH-HERE . You can also simply use public IPFS gateways like: 
 * Cloudflare - https://cloudflare-ipfs.com/ipfs/YOUR-FILE-HASH-HERE
 * IPFS.io - https://ipfs.io/ipfs/YOUR-FILE-HASH-HERE
 * Eternum.io - https://ipfs.eternum.io/ipfs/YOUR-FILE-HASH-HERE
