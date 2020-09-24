@@ -1,0 +1,52 @@
+FROM lsiobase/alpine:3.12
+
+# set version label
+ARG BUILD_DATE
+ARG VERSION
+ARG IPFSWEB_VERSION
+LABEL build_version="Linuxserver.io version:- ${VERSION} Build-date:- ${BUILD_DATE}"
+LABEL maintainer="thelamer"
+
+# environment
+ENV IPFS_PATH=/config/ipfs
+
+RUN \
+ echo "**** install runtime packages ****" && \
+ apk add --no-cache \
+	curl \
+	go-ipfs \
+	logrotate \
+	nginx \
+	openssl \
+	php7 \
+	php7-fpm && \
+ echo "**** install ipfs web-ui ****" && \
+ mkdir -p /var/www/html/ && \
+ if [ -z ${IPFSWEB_VERSION+x} ]; then \
+	IPFSWEB_VERSION=$(curl -sX GET "https://api.github.com/repos/ipfs-shipyard/ipfs-webui/releases/latest" \
+	| awk '/tag_name/{print $4;exit}' FS='[""]'); \
+ fi && \
+ curl -o \
+	/tmp/ipfswebui.tar.gz -L \
+	"https://github.com/ipfs-shipyard/ipfs-webui/releases/download/${IPFSWEB_VERSION}/ipfs-webui.tar.gz" && \
+ tar xf \
+ /tmp/ipfswebui.tar.gz -C \
+	/var/www/html/ --strip-components=1 && \
+ echo "**** configure nginx ****" && \
+ echo 'fastcgi_param  SCRIPT_FILENAME $document_root$fastcgi_script_name;' >> \
+	/etc/nginx/fastcgi_params && \
+ rm -f /etc/nginx/conf.d/default.conf && \
+ echo "**** fix logrotate ****" && \
+ sed -i "s#/var/log/messages {}.*# #g" /etc/logrotate.conf && \
+ sed -i 's#/usr/sbin/logrotate /etc/logrotate.conf#/usr/sbin/logrotate /etc/logrotate.conf -s /config/log/logrotate.status#g' \
+	/etc/periodic/daily/logrotate && \
+ echo "**** cleanup ****" && \
+ rm -rf \
+	/tmp/*
+
+# copy files
+COPY root/ /
+
+# ports and volumes
+EXPOSE 80 443 4001 5001 8080
+VOLUME ["/config"]

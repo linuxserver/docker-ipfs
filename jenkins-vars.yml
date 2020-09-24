@@ -1,0 +1,29 @@
+---
+
+# jenkins variables
+project_name: docker-ipfs
+external_type: github_stable
+release_type: stable
+release_tag: latest
+ls_branch: master
+repo_vars:
+  - EXT_GIT_BRANCH = 'master'
+  - EXT_USER = 'ipfs-shipyard'
+  - EXT_REPO = 'ipfs-webui'
+  - BUILD_VERSION_ARG = 'IPFSWEB_VERSION'
+  - LS_USER = 'linuxserver'
+  - LS_REPO = 'docker-ipfs'
+  - CONTAINER_NAME = 'ipfs'
+  - DOCKERHUB_IMAGE = 'linuxserver/ipfs'
+  - DEV_DOCKERHUB_IMAGE = 'lsiodev/ipfs'
+  - PR_DOCKERHUB_IMAGE = 'lspipepr/ipfs'
+  - DIST_IMAGE = 'alpine'
+  - MULTIARCH='true'
+  - CI='true'
+  - CI_WEB='true'
+  - CI_PORT='80'
+  - CI_SSL='false'
+  - CI_DELAY='120'
+  - CI_DOCKERENV='TZ=US/Pacific'
+  - CI_AUTH='user:password'
+  - CI_WEBPATH=''

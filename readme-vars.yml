@@ -1,0 +1,53 @@
+---
+
+# project information
+project_name: ipfs
+project_url: "https://ipfs.io/"
+project_logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/Ipfs-logo-1024-ice-text.png/480px-Ipfs-logo-1024-ice-text.png"
+project_blurb: |
+  [{{ project_name|capitalize }}]({{ project_url }}) - A peer-to-peer hypermedia protocol designed to make the web faster, safer, and more open.
+project_lsio_github_repo_url: "https://github.com/linuxserver/docker-{{ project_name }}"
+
+# supported architectures
+available_architectures:
+  - { arch: "{{ arch_x86_64 }}", tag: "amd64-latest"}
+  - { arch: "{{ arch_arm64 }}", tag: "arm64v8-latest"}
+  - { arch: "{{ arch_armhf }}", tag: "arm32v7-latest"}
+
+# container parameters
+param_container_name: "{{ project_name }}"
+param_usage_include_vols: true
+param_volumes:
+  - { vol_path: "/config", vol_host_path: "/path/to/data", desc: "IPFS storage and config files/logs" }
+
+param_usage_include_ports: true
+param_ports:
+  - { external_port: "80", internal_port: "80", port_desc: "The port for the IPFS web UI" }
+  - { external_port: "4001", internal_port: "4001", port_desc: "Peering port, this is the only port you should expose to the internet" }
+  - { external_port: "5001", internal_port: "5001", port_desc: "API port, the clientside webUI needs to be able to talk to this from whatever machine your web browser is on" }
+  - { external_port: "8080", internal_port: "8080", port_desc: "Gateway Port, actually serves IPFS content" }
+param_usage_include_env: true
+param_env_vars:
+  - { env_var: "TZ", env_value: "Europe/London", desc: "Specify a timezone to use EG Europe/London"}
+# optional env variables
+opt_param_usage_include_ports: true
+opt_param_ports:
+  - { external_port: "443", internal_port: "443", port_desc: "HTTPS port for web UI" }
+
+# application setup block
+app_setup_block_enabled: true
+app_setup_block: |
+  In order to push files beyond your local gateway you have to make sure port 4001 is forwarded to the internet. This is required for IPFS peers to reach in and grab your files so public gateways can serve them.
+
+  Access the webui at http://localhost , if not using localhost scroll to the bottom of the page and set the API Address setting to IE http://192.168.1.10:5001 , from there you can upload and manage files you push to IPFS. Your gateway to access IPFS files is http://localhost:8080/ipfs/YOUR-FILE-HASH-HERE . You can also simply use public IPFS gateways like: 
+  * Cloudflare - https://cloudflare-ipfs.com/ipfs/YOUR-FILE-HASH-HERE
+  * IPFS.io - https://ipfs.io/ipfs/YOUR-FILE-HASH-HERE
+  * Eternum.io - https://ipfs.eternum.io/ipfs/YOUR-FILE-HASH-HERE
+  
+  Cloudflare is a solid option as they actually edge cache the files on their CDN so even if your node pinning the item goes down for periods of time their cache will last up to a month. 
+  
+  For more on using IPFS please read the docs [here](https://docs.ipfs.io/)
+   
+# changelog
+changelogs:
+  - { date: "09.07.19:", desc: "Initial version." }
