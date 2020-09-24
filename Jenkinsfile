@@ -17,7 +17,7 @@ pipeline {
     GITLAB_TOKEN=credentials('b6f0f1dd-6952-4cf6-95d1-9c06380283f0')
     GITLAB_NAMESPACE=credentials('gitlab-namespace-id')
     EXT_GIT_BRANCH = 'master'
-    EXT_USER = 'thelamer'
+    EXT_USER = 'ipfs-shipyard'
     EXT_REPO = 'ipfs-webui'
     BUILD_VERSION_ARG = 'IPFSWEB_VERSION'
     LS_USER = 'linuxserver'
@@ -58,7 +58,7 @@ pipeline {
           env.CODE_URL = 'https://github.com/' + env.LS_USER + '/' + env.LS_REPO + '/commit/' + env.GIT_COMMIT
           env.DOCKERHUB_LINK = 'https://hub.docker.com/r/' + env.DOCKERHUB_IMAGE + '/tags/'
           env.PULL_REQUEST = env.CHANGE_ID
-          env.TEMPLATED_FILES = 'Jenkinsfile README.md LICENSE ./.github/FUNDING.yml ./.github/ISSUE_TEMPLATE.md ./.github/PULL_REQUEST_TEMPLATE.md'
+          env.TEMPLATED_FILES = 'Jenkinsfile README.md LICENSE ./.github/FUNDING.yml ./.github/ISSUE_TEMPLATE.md ./.github/PULL_REQUEST_TEMPLATE.md ./.github/workflows/greetings.yml ./.github/workflows/stale.yml'
         }
         script{
           env.LS_RELEASE_NUMBER = sh(
@@ -146,6 +146,7 @@ pipeline {
             env.CI_TAGS = env.EXT_RELEASE_CLEAN + '-ls' + env.LS_TAG_NUMBER
           }
           env.META_TAG = env.EXT_RELEASE_CLEAN + '-ls' + env.LS_TAG_NUMBER
+          env.EXT_RELEASE_TAG = 'version-' + env.EXT_RELEASE_CLEAN
         }
       }
     }
@@ -166,6 +167,7 @@ pipeline {
             env.CI_TAGS = env.EXT_RELEASE_CLEAN + '-pkg-' + env.PACKAGE_TAG + '-dev-' + env.COMMIT_SHA
           }
           env.META_TAG = env.EXT_RELEASE_CLEAN + '-pkg-' + env.PACKAGE_TAG + '-dev-' + env.COMMIT_SHA
+          env.EXT_RELEASE_TAG = 'version-' + env.EXT_RELEASE_CLEAN
           env.DOCKERHUB_LINK = 'https://hub.docker.com/r/' + env.DEV_DOCKERHUB_IMAGE + '/tags/'
         }
       }
@@ -186,6 +188,7 @@ pipeline {
             env.CI_TAGS = env.EXT_RELEASE_CLEAN + '-pkg-' + env.PACKAGE_TAG + '-pr-' + env.PULL_REQUEST
           }
           env.META_TAG = env.EXT_RELEASE_CLEAN + '-pkg-' + env.PACKAGE_TAG + '-pr-' + env.PULL_REQUEST
+          env.EXT_RELEASE_TAG = 'version-' + env.EXT_RELEASE_CLEAN
           env.CODE_URL = 'https://github.com/' + env.LS_USER + '/' + env.LS_REPO + '/pull/' + env.PULL_REQUEST
           env.DOCKERHUB_LINK = 'https://hub.docker.com/r/' + env.PR_DOCKERHUB_IMAGE + '/tags/'
         }
@@ -244,7 +247,7 @@ pipeline {
                 cd ${TEMPDIR}/repo/${LS_REPO}
                 git checkout -f master
                 cd ${TEMPDIR}/docker-${CONTAINER_NAME}
-                mkdir -p ${TEMPDIR}/repo/${LS_REPO}/.github
+                mkdir -p ${TEMPDIR}/repo/${LS_REPO}/.github/workflows
                 cp --parents ${TEMPLATED_FILES} ${TEMPDIR}/repo/${LS_REPO}/
                 cd ${TEMPDIR}/repo/${LS_REPO}/
                 git add ${TEMPLATED_FILES}
@@ -553,8 +556,10 @@ pipeline {
                   for PUSHIMAGE in "${GITHUBIMAGE}" "${GITLABIMAGE}" "${IMAGE}"; do
                     docker tag ${IMAGE}:${META_TAG} ${PUSHIMAGE}:${META_TAG}
                     docker tag ${PUSHIMAGE}:${META_TAG} ${PUSHIMAGE}:latest
+                    docker tag ${PUSHIMAGE}:${EXT_RELEASE_TAG} ${PUSHIMAGE}:latest
                     docker push ${PUSHIMAGE}:latest
                     docker push ${PUSHIMAGE}:${META_TAG}
+                    docker push ${PUSHIMAGE}:${EXT_RELEASE_TAG}
                   done
                '''
           }
@@ -562,6 +567,7 @@ pipeline {
                 for DELETEIMAGE in "${GITHUBIMAGE}" "{GITLABIMAGE}" "${IMAGE}"; do
                   docker rmi \
                   ${DELETEIMAGE}:${META_TAG} \
+                  ${DELETEIMAGE}:${EXT_RELEASE_TAG} \
                   ${DELETEIMAGE}:latest || :
                 done
              '''
@@ -602,12 +608,18 @@ pipeline {
                     docker tag ${MANIFESTIMAGE}:amd64-${META_TAG} ${MANIFESTIMAGE}:amd64-latest
                     docker tag ${MANIFESTIMAGE}:arm32v7-${META_TAG} ${MANIFESTIMAGE}:arm32v7-latest
                     docker tag ${MANIFESTIMAGE}:arm64v8-${META_TAG} ${MANIFESTIMAGE}:arm64v8-latest
+                    docker tag ${MANIFESTIMAGE}:amd64-${META_TAG} ${MANIFESTIMAGE}:amd64-${EXT_RELEASE_TAG}
+                    docker tag ${MANIFESTIMAGE}:arm32v7-${META_TAG} ${MANIFESTIMAGE}:arm32v7-${EXT_RELEASE_TAG}
+                    docker tag ${MANIFESTIMAGE}:arm64v8-${META_TAG} ${MANIFESTIMAGE}:arm64v8-${EXT_RELEASE_TAG}
                     docker push ${MANIFESTIMAGE}:amd64-${META_TAG}
                     docker push ${MANIFESTIMAGE}:arm32v7-${META_TAG}
                     docker push ${MANIFESTIMAGE}:arm64v8-${META_TAG}
                     docker push ${MANIFESTIMAGE}:amd64-latest
                     docker push ${MANIFESTIMAGE}:arm32v7-latest
                     docker push ${MANIFESTIMAGE}:arm64v8-latest
+                    docker push ${MANIFESTIMAGE}:amd64-${EXT_RELEASE_TAG}
+                    docker push ${MANIFESTIMAGE}:arm32v7-${EXT_RELEASE_TAG}
+                    docker push ${MANIFESTIMAGE}:arm64v8-${EXT_RELEASE_TAG}
                     docker manifest push --purge ${MANIFESTIMAGE}:latest || :
                     docker manifest create ${MANIFESTIMAGE}:latest ${MANIFESTIMAGE}:amd64-latest ${MANIFESTIMAGE}:arm32v7-latest ${MANIFESTIMAGE}:arm64v8-latest
                     docker manifest annotate ${MANIFESTIMAGE}:latest ${MANIFESTIMAGE}:arm32v7-latest --os linux --arch arm
@@ -616,8 +628,12 @@ pipeline {
                     docker manifest create ${MANIFESTIMAGE}:${META_TAG} ${MANIFESTIMAGE}:amd64-${META_TAG} ${MANIFESTIMAGE}:arm32v7-${META_TAG} ${MANIFESTIMAGE}:arm64v8-${META_TAG}
                     docker manifest annotate ${MANIFESTIMAGE}:${META_TAG} ${MANIFESTIMAGE}:arm32v7-${META_TAG} --os linux --arch arm
                     docker manifest annotate ${MANIFESTIMAGE}:${META_TAG} ${MANIFESTIMAGE}:arm64v8-${META_TAG} --os linux --arch arm64 --variant v8
+                    docker manifest create ${MANIFESTIMAGE}:${EXT_RELEASE_TAG} ${MANIFESTIMAGE}:amd64-${EXT_RELEASE_TAG} ${MANIFESTIMAGE}:arm32v7-${EXT_RELEASE_TAG} ${MANIFESTIMAGE}:arm64v8-${EXT_RELEASE_TAG}
+                    docker manifest annotate ${MANIFESTIMAGE}:${EXT_RELEASE_TAG} ${MANIFESTIMAGE}:arm32v7-${EXT_RELEASE_TAG} --os linux --arch arm
+                    docker manifest annotate ${MANIFESTIMAGE}:${EXT_RELEASE_TAG} ${MANIFESTIMAGE}:arm64v8-${EXT_RELEASE_TAG} --os linux --arch arm64 --variant v8
                     docker manifest push --purge ${MANIFESTIMAGE}:latest
                     docker manifest push --purge ${MANIFESTIMAGE}:${META_TAG} 
+                    docker manifest push --purge ${MANIFESTIMAGE}:${EXT_RELEASE_TAG} 
                   done
                   docker tag ${IMAGE}:amd64-${META_TAG} ${GITHUBIMAGE}:amd64-${META_TAG}
                   docker tag ${IMAGE}:arm32v7-${META_TAG} ${GITHUBIMAGE}:arm32v7-${META_TAG}
@@ -626,6 +642,10 @@ pipeline {
                   docker tag ${GITHUBIMAGE}:amd64-${META_TAG} ${GITHUBIMAGE}:${META_TAG}
                   docker tag ${GITHUBIMAGE}:arm32v7-${META_TAG} ${GITHUBIMAGE}:arm32v7-latest
                   docker tag ${GITHUBIMAGE}:arm64v8-${META_TAG} ${GITHUBIMAGE}:arm64v8-latest
+                  docker tag ${GITHUBIMAGE}:amd64-${META_TAG} ${GITHUBIMAGE}:amd64-${EXT_RELEASE_TAG}
+                  docker tag ${GITHUBIMAGE}:amd64-${META_TAG} ${GITHUBIMAGE}:${EXT_RELEASE_TAG}
+                  docker tag ${GITHUBIMAGE}:arm32v7-${META_TAG} ${GITHUBIMAGE}:arm32v7-${EXT_RELEASE_TAG}
+                  docker tag ${GITHUBIMAGE}:arm64v8-${META_TAG} ${GITHUBIMAGE}:arm64v8-${EXT_RELEASE_TAG}
                   docker push ${GITHUBIMAGE}:amd64-${META_TAG}
                   docker push ${GITHUBIMAGE}:arm32v7-${META_TAG}
                   docker push ${GITHUBIMAGE}:arm64v8-${META_TAG}
@@ -633,6 +653,10 @@ pipeline {
                   docker push ${GITHUBIMAGE}:${META_TAG}
                   docker push ${GITHUBIMAGE}:arm32v7-latest
                   docker push ${GITHUBIMAGE}:arm64v8-latest
+                  docker push ${GITHUBIMAGE}:${EXT_RELEASE_TAG}
+                  docker push ${GITHUBIMAGE}:amd64-${EXT_RELEASE_TAG}
+                  docker push ${GITHUBIMAGE}:arm32v7-${EXT_RELEASE_TAG}
+                  docker push ${GITHUBIMAGE}:arm64v8-${EXT_RELEASE_TAG}
                '''
           }
           sh '''#! /bin/bash
@@ -698,6 +722,10 @@ pipeline {
           ]
         ]) {
           sh '''#! /bin/bash
+                set -e
+                TEMPDIR=$(mktemp -d)
+                docker pull linuxserver/jenkins-builder:latest
+                docker run --rm -e CONTAINER_NAME=${CONTAINER_NAME} -e GITHUB_BRANCH="${BRANCH_NAME}" -v ${TEMPDIR}:/ansible/jenkins linuxserver/jenkins-builder:latest 
                 docker pull lsiodev/readme-sync
                 docker run --rm=true \
                   -e DOCKERHUB_USERNAME=$DOCKERUSER \
@@ -705,7 +733,9 @@ pipeline {
                   -e GIT_REPOSITORY=${LS_USER}/${LS_REPO} \
                   -e DOCKER_REPOSITORY=${IMAGE} \
                   -e GIT_BRANCH=master \
-                  lsiodev/readme-sync bash -c 'node sync' '''
+                  -v ${TEMPDIR}/docker-${CONTAINER_NAME}:/mnt \
+                  lsiodev/readme-sync bash -c 'node sync' 
+                rm -Rf ${TEMPDIR} '''
         }
       }
     }
