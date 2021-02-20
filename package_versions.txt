@@ -8,7 +8,7 @@ ca-certificates-20191127-r4
 ca-certificates-bundle-20191127-r4
 coreutils-8.32-r0
 curl-7.69.1-r3
-go-ipfs-0.7.0-r0
+go-ipfs-0.8.0-r0
 libacl-2.2.53-r0
 libattr-2.4.48-r0
 libc-utils-0.7.2-r3
@@ -28,7 +28,7 @@ ncurses-libs-6.2_p20200523-r0
 ncurses-terminfo-base-6.2_p20200523-r0
 nghttp2-libs-1.41.0-r0
 nginx-1.18.0-r1
-openssl-1.1.1i-r0
+openssl-1.1.1j-r0
 pcre-8.44-r0
 pcre2-10.35-r0
 php7-7.3.27-r0
