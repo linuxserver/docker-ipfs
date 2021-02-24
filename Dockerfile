@@ -1,4 +1,4 @@
-FROM ghcr.io/linuxserver/baseimage-alpine:3.12
+FROM ghcr.io/linuxserver/baseimage-alpine:3.13
 
 # set version label
 ARG BUILD_DATE
@@ -14,13 +14,12 @@ RUN \
  echo "**** install runtime packages ****" && \
  apk add --no-cache \
 	curl \
+	go-ipfs \
 	logrotate \
 	nginx \
 	openssl \
 	php7 \
 	php7-fpm && \
- apk add --no-cache --repository=http://dl-cdn.alpinelinux.org/alpine/edge/community \
-	go-ipfs && \
  echo "**** install ipfs web-ui ****" && \
  mkdir -p /var/www/html/ && \
  if [ -z ${IPFSWEB_VERSION+x} ]; then \
