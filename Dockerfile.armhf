@@ -23,12 +23,12 @@ RUN \
  echo "**** install ipfs web-ui ****" && \
  mkdir -p /var/www/html/ && \
  if [ -z ${IPFSWEB_VERSION+x} ]; then \
-	IPFSWEB_VERSION=$(curl -sX GET "https://api.github.com/repos/ipfs-shipyard/ipfs-webui/releases/latest" \
+	IPFSWEB_VERSION=$(curl -sX GET "https://api.github.com/repos/ipfs/ipfs-webui/releases/latest" \
 	| awk '/tag_name/{print $4;exit}' FS='[""]'); \
  fi && \
  curl -o \
 	/tmp/ipfswebui.tar.gz -L \
-	"https://github.com/ipfs-shipyard/ipfs-webui/releases/download/${IPFSWEB_VERSION}/ipfs-webui.tar.gz" && \
+	"https://github.com/ipfs/ipfs-webui/releases/download/${IPFSWEB_VERSION}/ipfs-webui.tar.gz" && \
  tar xf \
  /tmp/ipfswebui.tar.gz -C \
 	/var/www/html/ --strip-components=1 && \
