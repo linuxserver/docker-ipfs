@@ -8,7 +8,7 @@ release_tag: latest
 ls_branch: master
 repo_vars:
   - EXT_GIT_BRANCH = 'master'
-  - EXT_USER = 'ipfs-shipyard'
+  - EXT_USER = 'ipfs'
   - EXT_REPO = 'ipfs-webui'
   - BUILD_VERSION_ARG = 'IPFSWEB_VERSION'
   - LS_USER = 'linuxserver'
