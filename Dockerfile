@@ -1,3 +1,25 @@
+FROM ghcr.io/linuxserver/baseimage-alpine:3.13 as migration-bins
+
+RUN \
+ echo "**** install buid packages ****" && \
+ apk add --no-cache \
+	curl \
+	git \
+	go && \
+ echo "**** build fs-repo-migrations ****" && \
+ mkdir /bins && \
+ IPFSMIG_VERSION=$(curl -sX GET "https://api.github.com/repos/ipfs/fs-repo-migrations/releases/latest" \
+	| awk '/tag_name/{print $4;exit}' FS='[""]') && \
+ git clone https://github.com/ipfs/fs-repo-migrations.git && \
+ cd fs-repo-migrations && \
+ git checkout ${IPFSMIG_VERSION} && \
+ for BUILD in fs-repo-migrations fs-repo-9-to-10 fs-repo-10-to-11; do \
+	cd ${BUILD} && \
+	go build && \
+	mv fs-repo-* /bins/ && \
+	cd .. ; \
+ done
+ 
 FROM ghcr.io/linuxserver/baseimage-alpine:3.13
 
 # set version label
@@ -14,12 +36,13 @@ RUN \
  echo "**** install runtime packages ****" && \
  apk add --no-cache \
 	curl \
-	go-ipfs \
 	logrotate \
 	nginx \
 	openssl \
 	php7 \
 	php7-fpm && \
+ apk add --no-cache --repository=http://dl-cdn.alpinelinux.org/alpine/edge/community \
+	go-ipfs && \
  echo "**** install ipfs web-ui ****" && \
  mkdir -p /var/www/html/ && \
  if [ -z ${IPFSWEB_VERSION+x} ]; then \
@@ -46,6 +69,7 @@ RUN \
 
 # copy files
 COPY root/ /
+COPY --from=migration-bins /bins /usr/bin
 
 # ports and volumes
 EXPOSE 80 443 4001 5001 8080
