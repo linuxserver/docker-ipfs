@@ -32,9 +32,9 @@ nginx-1.18.0-r13
 openssl-1.1.1k-r0
 pcre-8.44-r0
 pcre2-10.36-r0
-php7-7.4.15-r0
-php7-common-7.4.15-r0
-php7-fpm-7.4.15-r0
+php7-7.4.19-r0
+php7-common-7.4.19-r0
+php7-fpm-7.4.19-r0
 popt-1.18-r0
 procps-3.3.16-r0
 readline-8.1.0-r0
