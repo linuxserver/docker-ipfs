@@ -9,7 +9,7 @@ ca-certificates-20191127-r5
 ca-certificates-bundle-20191127-r5
 coreutils-8.32-r2
 curl-7.77.0-r1
-go-ipfs-0.8.0-r1
+go-ipfs-0.9.0-r0
 libacl-2.2.53-r0
 libattr-2.4.48-r0
 libc-utils-0.7.2-r3
