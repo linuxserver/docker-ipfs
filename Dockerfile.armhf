@@ -22,7 +22,7 @@ RUN \
     cd .. ; \
   done
 
-FROM ghcr.io/linuxserver/baseimage-ubuntu:arm32v7-focal as ipfswebui
+FROM ghcr.io/linuxserver/baseimage-ubuntu:amd64-focal as ipfswebui
 
 ARG IPFSWEB_VERSION
 
