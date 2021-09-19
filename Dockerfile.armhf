@@ -4,8 +4,10 @@ RUN \
   echo "**** install buid packages ****" && \
   apk add --no-cache \
     curl \
+    gcc \
     git \
-    go && \
+    go \
+    musl-dev && \
   echo "**** build fs-repo-migrations ****" && \
   mkdir /bins && \
   IPFSMIG_VERSION=$(curl -sX GET "https://api.github.com/repos/ipfs/fs-repo-migrations/releases/latest" \
