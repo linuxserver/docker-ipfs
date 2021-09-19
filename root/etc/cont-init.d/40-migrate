@@ -2,6 +2,6 @@
 
 # ipfs migrate check on startup
 if [ -d "/config/ipfs" ]; then
- echo "[ipfs-upgrade] Checking if fs-repo needs to be upgraded (this may take some time)"
- s6-setuidgid abc /usr/bin/fs-repo-migrations -y
+    echo "[ipfs-upgrade] Checking if fs-repo needs to be upgraded (this may take some time)"
+    s6-setuidgid abc /usr/bin/fs-repo-migrations -y
 fi
