@@ -50,7 +50,7 @@ app_setup_block: |
    
 # changelog
 changelogs:
-  - { date: "19.09.21:", desc: "Build webui from source as the latest upstream release does not contain the web files. Update code formatting." }
+  - { date: "19.09.21:", desc: "Build webui from source. Update code formatting. Rebase to Alpine 3.14." }
   - { date: "01.04.21:", desc: "Add migration bins to image to support upgrades." }
   - { date: "24.02.20:", desc: "Rebase to Alpine 3.13." }
   - { date: "09.07.19:", desc: "Initial version." }

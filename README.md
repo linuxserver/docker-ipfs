@@ -240,7 +240,7 @@ Once registered you can define the dockerfile to use with `-f Dockerfile.aarch64
 
 ## Versions
 
-* **19.09.21:** - Build webui from source as the latest upstream release does not contain the web files. Update code formatting.
+* **19.09.21:** - Build webui from source. Update code formatting. Rebase to Alpine 3.14.
 * **01.04.21:** - Add migration bins to image to support upgrades.
 * **24.02.20:** - Rebase to Alpine 3.13.
 * **09.07.19:** - Initial version.
