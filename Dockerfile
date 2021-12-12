@@ -19,7 +19,7 @@ RUN \
   apk add --no-cache --repository=http://dl-cdn.alpinelinux.org/alpine/edge/community && \
   wget https://github.com/ipfs/go-ipfs/releases/download/v0.11.0/go-ipfs_v0.11.0_linux-arm64.tar.gz && \
   tar -zxvf go-ipfs_v0.11.0_linux-arm64.tar.gz && \
-  cd go-ipfs/ && cp ipfs /bin/ipfs && \
+  cd go-ipfs/ && mv ipfs /bin/ipfs && cd .. && rm -r go-ipfs && rm go-ipfs_v0.11.0_linux-arm64.tar.gz && \
   mkdir -p /var/www/html && \
   echo "**** fix logrotate ****" && \
   sed -i "s#/var/log/messages {}.*# #g" /etc/logrotate.conf && \
