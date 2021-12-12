@@ -1,12 +1,51 @@
 #!/usr/bin/with-contenv bash
 
+## comment this line if you want to keep old configurations
+#rm -f /config/ipfs/config-pre-*
+
 # ipfs config
 if [ ! -d "/config/ipfs" ]; then
-    ipfs init
+    ipfs init --profile server || ipfs config profile apply server
+    ipfs config --json Experimental.Libp2pStreamMounting true
+    ipfs config --json Experimental.P2pHttpProxy true
+    ipfs config Reprovider.Strategy roots
+    ipfs config Routing.Type dhtclient
+    ipfs config Swarm.ConnMgr.Type basic
+    ipfs config Swarm.ConnMgr.GracePeriod 5s
+    ipfs config --json Swarm.ConnMgr.LowWater 0
+    ipfs config --json Swarm.ConnMgr.HighWater 2
+    ipfs config --bool Swarm.EnableRelayHop false
+    ipfs config --bool Swarm.DisableNatPortMap true
+    ipfs config --bool Swarm.EnableAutoRelay false
+    ipfs config AutoNAT.ServiceMode disabled
+    # Ref: https://docs.ipfs.io/how-to/peering-with-content-providers/#content-provider-list
+    ipfs config --json Peering.Peers '[
+        {"ID":"QmcfgsJsMtx6qJb74akCw1M24X1zFwgGo11h1cuhwQjtJP"},
+        {"ID":"QmWaik1eJcGHq1ybTWe7sezRfqKNcDRNkeBaLnGwQJz1Cj"},
+        {"ID":"QmNfpLrQQZr5Ns9FAJKpyzgnDL2GgC6xBug1yUZozKFgu4"},
+        {"ID":"QmPo1ygpngghu5it8u4Mr3ym6SEU2Wp2wA66Z91Y1S1g29"},
+        {"ID":"QmRjLSisUCHVpFa5ELVvX3qVPfdxajxWJEHs9kN3EcxAW6"},
+        {"ID":"QmPySsdmbczdZYBpbi2oq2WMJ8ErbfxtkG8Mo192UHkfGP"},
+        {"ID":"QmSarArpxemsPESa6FNkmuu9iSE1QWqPX2R3Aw6f5jq4D5"},
+        {"ID":"QmUEMvxS2e7iDrereVYc5SWPauXPyNwxcy9BXZrC1QTcHE"},
+        {"ID":"QmNSYxZAiJHeLdkBg38roksAR9So7Y5eojks1yjEcUtZ7i"},
+        {"ID":"QmUd6zHcbkbcs7SMxwLs48qZVX3vpcM8errYS7xEczwRMA"},
+        {"ID":"QmbVWZQhCGrS7DhgLqWbgvdmKN7JueKCREVanfnVpgyq8x"},
+        {"ID":"QmdnXwLrC8p1ueiq2Qya8joNvk3TVVDAut7PrikmZwubtR"},
+        {"ID":"12D3KooWCRscMgHgEo3ojm8ovzheydpvTEqsDtq7Vby38cMHrYjt"},
+        {"ID":"12D3KooWQtpvNvUYFzAo1cRYkydgk15JrMSHp6B6oujqgYSnvsVm"},
+        {"ID":"12D3KooWQcgCwNCTYkyLXXQSZuL5ry1TzpM8PRe9dKddfsk1BxXZ"}
+        ]'
+    ipfs config --json Gateway.PublicGateways '{
+        "forBase36": {"NoDNSLink":true,"Paths":["/p2p"],"UseSubdomains": true},
+        "localhost": {"NoDNSLink":false,"Paths":["/ipfs","/ipns"],"UseSubdomains": false}
+        }'
+    ipfs config --json Gateway.HTTPHeaders.Access-Control-Allow-Methods '["GET", "PUT", "POST", "HEAD", "DELETE", "PATCH", "OPTIONS"]'
     ipfs config --json API.HTTPHeaders.Access-Control-Allow-Origin '["*"]'
     ipfs config --json API.HTTPHeaders.Access-Control-Allow-Methods '["PUT", "POST"]'
     ipfs config --json Addresses.API '"/ip4/0.0.0.0/tcp/5001"'
     ipfs config --json Addresses.Gateway '"/ip4/0.0.0.0/tcp/8080"'
+    ipfs config profile apply randomports
 fi
 
 # make our folders
