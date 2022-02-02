@@ -8,6 +8,14 @@ project_blurb: |
   [{{ project_name|capitalize }}]({{ project_url }}) - A peer-to-peer hypermedia protocol designed to make the web faster, safer, and more open.
 project_lsio_github_repo_url: "https://github.com/linuxserver/docker-{{ project_name }}"
 
+project_deprecation_status: true
+project_deprecation_message: |
+  Please use the official IPFS container here:
+  https://hub.docker.com/r/ipfs/go-ipfs
+  When this project started the web interface was not integrated well
+  with the default IPFS server. Now it is great and well maintained, hosting
+  it on a static webserver does not make much sense anymore.
+
 # supported architectures
 available_architectures:
   - { arch: "{{ arch_x86_64 }}", tag: "amd64-latest"}
@@ -50,6 +58,7 @@ app_setup_block: |
    
 # changelog
 changelogs:
+  - { date: "02.02.22:", desc: "Deprecate." }
   - { date: "19.09.21:", desc: "Build webui from source. Update code formatting. Rebase to Alpine 3.14." }
   - { date: "01.04.21:", desc: "Add migration bins to image to support upgrades." }
   - { date: "24.02.20:", desc: "Rebase to Alpine 3.13." }

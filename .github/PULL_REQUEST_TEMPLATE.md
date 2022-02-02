@@ -1,3 +1,12 @@
+# DEPRECATION NOTICE
+
+This image is deprecated. We will not offer support for this image and it will not be updated.
+Please use the official IPFS container here:
+https://hub.docker.com/r/ipfs/go-ipfs
+When this project started the web interface was not integrated well
+with the default IPFS server. Now it is great and well maintained, hosting
+it on a static webserver does not make much sense anymore.
+
 <!--- Provide a general summary of your changes in the Title above -->
 
 [linuxserverurl]: https://linuxserver.io

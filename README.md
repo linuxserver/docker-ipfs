@@ -27,6 +27,15 @@ Find us at:
 * [GitHub](https://github.com/linuxserver) - view the source for all of our repositories.
 * [Open Collective](https://opencollective.com/linuxserver) - please consider helping us by either donating or contributing to our budget
 
+# DEPRECATION NOTICE
+
+This image is deprecated. We will not offer support for this image and it will not be updated.
+Please use the official IPFS container here:
+https://hub.docker.com/r/ipfs/go-ipfs
+When this project started the web interface was not integrated well
+with the default IPFS server. Now it is great and well maintained, hosting
+it on a static webserver does not make much sense anymore.
+
 # [linuxserver/ipfs](https://github.com/linuxserver/docker-ipfs)
 
 [![Scarf.io pulls](https://scarf.sh/installs-badge/linuxserver-ci/linuxserver%2Fipfs?color=94398d&label-color=555555&logo-color=ffffff&style=for-the-badge&package-type=docker)](https://scarf.sh/gateway/linuxserver-ci/docker/linuxserver%2Fipfs)
@@ -242,6 +251,7 @@ Once registered you can define the dockerfile to use with `-f Dockerfile.aarch64
 
 ## Versions
 
+* **02.02.22:** - Deprecate.
 * **19.09.21:** - Build webui from source. Update code formatting. Rebase to Alpine 3.14.
 * **01.04.21:** - Add migration bins to image to support upgrades.
 * **24.02.20:** - Rebase to Alpine 3.13.
