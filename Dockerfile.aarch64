@@ -40,7 +40,7 @@ RUN \
   fi && \
   git clone https://github.com/ipfs/ipfs-webui.git && \
   cd ipfs-webui/ && \
-  git checkout ${IPFSWEB_VERSION} && \
+  git checkout v2.13.0 && \
   npm install --production && \
   npm install typescript && \
   NODE_ENV=production \
